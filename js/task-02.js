@@ -1,30 +1,42 @@
+const colorPalette = document.querySelector(".color-palette");
+const output = document.querySelector(".output");
 
-    // Создаст отдельный элемент <li>. Обзательно используй метод document.createElement().
-    // Добавит название ингредиента как его текстовое содержимое.
-    // Добавит элементу класс item.
-    // После чего вставит все <li> за одну операцию в список ul.ingredients.
+colorPalette.addEventListener("click", selectColor);
 
-const ingredients = [
-  'Potatoes',
-  'Mushrooms',
-  'Garlic',
-  'Tomatos',
-  'Herbs',
-  'Condiments',
-];
-// function create a li-element
-//    income: string name
-//    outcome: a li-element with:
-                  // textContent = name
-                  // class='item' 
-const createItem = function (name) {
-  const element = document.createElement('li');
-  element.textContent = name;
-  element.classList.add('item');
-  return element;
+// This is where delegation «magic» happens
+function selectColor(event) {
+  if (event.target.nodeName !== "BUTTON") {
+    return;
+  }
+
+  const selectedColor = event.target.dataset.color;
+  output.textContent = `Selected color: ${selectedColor}`;
+  output.style.color = selectedColor;
 }
 
-const itemListCreate = ingredients.map(createItem);
-const list = document.querySelector("#ingredients");
-list.append(...itemListCreate);  
-//console.log(list);
+// Some helper functions to render palette items
+createPaletteItems();
+
+function createPaletteItems() {
+  const items = [];
+  for (let i = 0; i < 60; i++) {
+    const color = getRangomColor();
+    const item = document.createElement("button");
+    item.type = "button";
+    item.dataset.color = color;
+    item.style.backgroundColor = color;
+    item.classList.add("item");
+    items.push(item);
+  }
+  colorPalette.append(...items);
+}
+
+function getRangomColor() {
+  return `#${getRandomHex()}${getRandomHex()}${getRandomHex()}`;
+}
+
+function getRandomHex() {
+  return Math.round(Math.random() * 256)
+    .toString(16)
+    .padStart(2, "0");
+}

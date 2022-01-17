@@ -1,39 +1,51 @@
-// Task 1 
-// Part 1
-// Посчитает и выведет в консоль количество категорий
-// в ul#categories, то есть элементов li.item.
+//bubbling
 
-// 1.0
-const itemCollection = document.querySelectorAll('ul .item'); // we've got a NodeList. forEach method is presented.
-console.log(`Number of categories: ${itemCollection.length}`);
+/* const parent = document.querySelector("#parent");
+const child = document.querySelector("#child");
+const descendant = document.querySelector("#descendant");
 
-// // 2.o
-//const list = document.querySelector('#categories');
-    // // 2.1 we can use querySelectorAll by class "item"
-    // const itemCollection = list.querySelectorAll('.item'); // we've got a NodeList. forEach method is presented.
-    // console.log(itemCollection.length);
+parent.addEventListener("click", () => {
+  alert("Parent click handler");
+});
 
-    // // 2.2. or search all child
-    //// const itemCollection = list.children; // we've got a HTMLCollection. There is no forEach method in the HTMLCollection. 
-                                            // We have to use classical loop or transforn the HTMLCollection to array 
-    // const itemChildCount = list.childElementCount;
-    // //console.log(itemCollection)
-    // console.log(itemChildCount);
+child.addEventListener("click", () => {
+  alert("Child click handler");
+});
 
-    //  // 2.3 or getElementsByClassName
-    // const itemCollectionGEBCN = list.getElementsByClassName("item"); // we`ve got a HTMLCollection. There is no forEach method in the HTMLCollection. 
-    //                                             // We have to use classical loop or transforn the HTMLCollection to array  
-    // console.log(itemCollectionGEBCN.length);
+descendant.addEventListener("click", () => {
+  alert("Descendant click handler");
+}); */
 
-//Part 2
-//Для каждого элемента li.item в списке ul#categories, 
-//найдет и выведет в консоль текст заголовка элемента (тега <h2>) 
-//и количество элементов в категории (всех вложенных в него <li>).
-const taskFunction = function () {
-    const title =  arguments[0].querySelector('h2');
-    const descendantItem = arguments[0].querySelectorAll("li"); 
-    console.log('');
-    console.log(`Category: ${title.textContent}`);
-    console.log(`Elements: ${descendantItem.length}`);
-}
-itemCollection.forEach(taskFunction);
+//event.target
+//event.currentTarget
+
+/* const parent = document.querySelector('#parent');
+
+parent.addEventListener('click', (event) => {
+    console.log('event target:', event.target);
+    console.log('event current Target:', event.currentTarget);
+}) */
+
+// stop event bubbling
+
+/* const parent = document.querySelector("#parent");
+const child = document.querySelector("#child");
+const descendant = document.querySelector("#descendant");
+
+parent.addEventListener("click", () => {
+  alert(
+    "Parent click handler. This alert will not appear when clicking on Descendant, the event will not reach here!"
+  );
+});
+
+child.addEventListener("click", () => {
+  alert(
+    "Child click handler. This alert will not appear when clicking on Descendant, the event will not reach here!"
+  );
+});
+
+descendant.addEventListener("click", (event) => {
+    event.stopPropagation();
+    //event.stopImmediatePropagation();
+  alert("Descendant click handler");
+}); */
